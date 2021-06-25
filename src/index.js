@@ -42,31 +42,70 @@ import './index.css';
 
 // setInterval(tick, 1000);
 
-function Welcome (props) {
-    return <h1>Hello, {props.name}</h1>;
-}
+// function Welcome (props) {
+//     return <h1>Hello, {props.name}</h1>;
+// }
 
-class _Welcome extends React.Component {
-    render (){
-        return <h1>Hello, {this.props.name}</h1>
-    }
-}
+// class _Welcome extends React.Component {
+//     render (){
+//         return <h1>Hello, {this.props.name}</h1>
+//     }
+// }
 
 // the above two components are equivalent from React's point of view.
 
-const element = <Welcome name="Sara"/>;
+// const element = <Welcome name="Sara"/>;
 
-function App () {
-    return (
-        <div>
-            <Welcome name='Ann'/>
-            <Welcome name='Shay'/>
-            <Welcome name='Mary'/>
-        </div>
+// function App () {
+//     return (
+//         <div>
+//             <Welcome name='Ann'/>
+//             <Welcome name='Shay'/>
+//             <Welcome name='Mary'/>
+//         </div>
+//     );
+// }
+
+// ReactDOM.render(
+//     <App/>,
+//     document.getElementById('root')
+// );
+
+class Clock extends React.Component {
+
+    constructor (props) {
+        super(props);
+        this.state = {date : new Date()};
+    }
+
+    // lifecycle methods
+    componentDidMount (){
+        this.timerID = setInterval(()=> this.tick(), 1000);
+    }
+    // lifecycle methods
+    componentWillUnmount (){
+        clearInterval(this.timerID);
+    }
+
+    tick () {
+        this.setState({ date : new Date()});
+    }
+
+    render () {
+        return (
+            <div>
+                <h1>Hello World</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    }
+}
+
+function tick(){
+    ReactDOM.render(
+        <Clock />,
+        document.getElementById('root')
     );
 }
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById('root')
-);
+setInterval(tick, 1000);

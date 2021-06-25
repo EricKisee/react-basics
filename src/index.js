@@ -30,14 +30,43 @@ import './index.css';
 //     document.getElementById('root')
 // );
 
-function tick () {
-    const element = (
-        <div>
-            <h1>Hello World</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-        </div>
-    );
-    ReactDOM.render(element, document.getElementById('root'));
+// function tick () {
+//     const element = (
+//         <div>
+//             <h1>Hello World</h1>
+//             <h2>It is {new Date().toLocaleTimeString()}.</h2>
+//         </div>
+//     );
+//     ReactDOM.render(element, document.getElementById('root'));
+// }
+
+// setInterval(tick, 1000);
+
+function Welcome (props) {
+    return <h1>Hello, {props.name}</h1>;
 }
 
-setInterval(tick, 1000);
+class _Welcome extends React.Component {
+    render (){
+        return <h1>Hello, {this.props.name}</h1>
+    }
+}
+
+// the above two components are equivalent from React's point of view.
+
+const element = <Welcome name="Sara"/>;
+
+function App () {
+    return (
+        <div>
+            <Welcome name='Ann'/>
+            <Welcome name='Shay'/>
+            <Welcome name='Mary'/>
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <App/>,
+    document.getElementById('root')
+);

@@ -1,4 +1,5 @@
 import React from 'react';
+import reactDom from 'react-dom';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -71,41 +72,88 @@ import './index.css';
 //     document.getElementById('root')
 // );
 
-class Clock extends React.Component {
+// class Clock extends React.Component {
 
-    constructor (props) {
+//     constructor (props) {
+//         super(props);
+//         this.state = {date : new Date()};
+//     }
+
+//     // lifecycle methods
+//     componentDidMount (){
+//         this.timerID = setInterval(()=> this.tick(), 1000);
+//     }
+//     // lifecycle methods
+//     componentWillUnmount (){
+//         clearInterval(this.timerID);
+//     }
+
+//     tick () {
+//         this.setState({ date : new Date()});
+//     }
+
+//     render () {
+//         return (
+//             <div>
+//                 <h1>Hello World</h1>
+//                 <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+//             </div>
+//         );
+//     }
+// }
+
+// function tick(){
+//     ReactDOM.render(
+//         <Clock />,
+//         document.getElementById('root')
+//     );
+// }
+
+// setInterval(tick, 1000);
+
+// ReactDOM.render(
+//     <Form/>,
+//     document.getElementById('root')
+
+// );
+
+// function Form () {
+//     function handleSubmit (e) {
+//         e.preventDefault();
+//         console.log('you clicked submit.');
+//     }
+
+//     return (
+//         <form onSubmit={handleSubmit}>
+//             <button type="submit">Submit</button>
+//         </form>
+//     );
+// }
+
+class Toggle extends React.Component {
+    constructor (props){
         super(props);
-        this.state = {date : new Date()};
+        this.state = {isToggleOn : true};
+        // this binding is neccesary to make `this` work in the callback
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    // lifecycle methods
-    componentDidMount (){
-        this.timerID = setInterval(()=> this.tick(), 1000);
-    }
-    // lifecycle methods
-    componentWillUnmount (){
-        clearInterval(this.timerID);
-    }
-
-    tick () {
-        this.setState({ date : new Date()});
+    handleClick (){
+        this.setState(prevState => ({
+            isToggleOn : !prevState.isToggleOn
+        }));
     }
 
     render () {
         return (
-            <div>
-                <h1>Hello World</h1>
-                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-            </div>
+            <button onClick = {this.handleClick}>
+                {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
         );
     }
 }
 
-function tick(){
-    ReactDOM.render(
-        <Clock />,
-        document.getElementById('root')
-    );
-}
-
-setInterval(tick, 1000);
+ReactDOM.render (
+    <Toggle/>,
+    document.getElementById('root')
+);

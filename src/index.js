@@ -1,5 +1,4 @@
 import React from 'react';
-import reactDom from 'react-dom';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -130,30 +129,189 @@ import './index.css';
 //     );
 // }
 
-class Toggle extends React.Component {
-    constructor (props){
-        super(props);
-        this.state = {isToggleOn : true};
-        // this binding is neccesary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this);
+// class Toggle extends React.Component {
+//     constructor (props){
+//         super(props);
+//         this.state = {isToggleOn : true};
+//         // this binding is neccesary to make `this` work in the callback
+//         this.handleClick = this.handleClick.bind(this);
+//     }
+
+//     handleClick (){
+//         this.setState(prevState => ({
+//             isToggleOn : !prevState.isToggleOn
+//         }));
+//     }
+
+//     render () {
+//         return (
+//             <button onClick = {this.handleClick}>
+//                 {this.state.isToggleOn ? 'ON' : 'OFF'}
+//             </button>
+//         );
+//     }
+// }
+
+// ReactDOM.render (
+//     <Toggle/>,
+//     document.getElementById('root')
+// );
+
+// function Greeting (props) {
+//     const isLoggedIn = props.isLoggedIn;
+//     if(isLoggedIn){
+//         return <UserGreeting/>;
+//     }
+//     return <GuestGreeting/>;
+// }
+// function UserGreeting(props) {
+//     return <h1>Welcome back!</h1>;
+// }
+
+// function GuestGreeting(props) {
+//     return <h1>Please sign up.</h1>;
+// }
+
+// function LoginButton (props) {
+//     return (
+//         <button onClick = {props.onClick}>
+//             Login
+//         </button>
+//     );
+// }
+
+// function LogoutButton (props) {
+//     return (
+//         <button onClick={props.onClick}>
+//             Logout
+//         </button>
+//     );
+// }
+
+// class LoginControl extends React.Component {
+    
+//     constructor (props) {
+//         super (props);
+//         this.handleLoginClick = this.handleLoginClick.bind(this);
+//         this.handleLogOutClick = this.handleLogOutClick.bind(this);
+//         this.state = {isLoggedIn : false};
+//     }
+
+//     handleLoginClick () {
+//         this.setState ({isLoggedIn : true});
+//     }
+
+//     handleLogOutClick () {
+//         this.setState ({isLoggedIn : false});
+//     }
+
+//     render () {
+//         const isLoggedIn = this.state.isLoggedIn;
+//         let button;
+//         if (isLoggedIn) {
+//             button = <LogoutButton onClick = {this.handleLogOutClick}/>;
+//         } else {
+//             button = <LoginButton onClick= {this.handleLoginClick} />;
+//         }
+//         return (
+//             <div>
+//                 <Greeting isLoggedIn = {isLoggedIn}/>
+//                 {button}
+//             </div>
+//         );
+//     }
+// }
+
+// ReactDOM.render(
+//     // Try changing to isLoggedIn={true}:
+//     <LoginControl/>,
+//     document.getElementById('root')
+// );
+
+
+// Inline If with Logical && Operator
+
+// function MailBox (props) {
+//     const unreadMessages = props.unreadMessages;
+//     return (
+//         <div>
+//             <h1>Hello!</h1>
+//             {
+//                 unreadMessages.length > 0 &&
+//                 <h2> You have {unreadMessages.length} unread messages. </h2>
+//             }
+//         </div>
+//     );
+// }
+
+// const messages = ['react','re: react', 're: re: react'];
+// ReactDOM.render(
+//     <MailBox unreadMessages={messages} />,
+//     document.getElementById('root')
+// );
+
+
+// // Inline If-Else with Conditional 
+// render() {
+//     const isLoggedIn = this.state.isLoggedIn;
+//     return (
+//       <div>
+//         The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+//       </div>
+//     );
+//   }
+
+// render() {
+//     const isLoggedIn = this.state.isLoggedIn;
+//     return (
+//       <div>
+//         {isLoggedIn
+//           ? <LogoutButton onClick={this.handleLogoutClick} />
+//           : <LoginButton onClick={this.handleLoginClick} />
+//         }
+//       </div>
+//     );
+//   }
+
+
+function WarningBanner (props) {
+    if (!props.warn) {
+        return null;
     }
 
-    handleClick (){
-        this.setState(prevState => ({
-            isToggleOn : !prevState.isToggleOn
+    return (
+        <div className="warning">
+            Warning!
+        </div>
+    );
+}
+
+class Page extends React.Component {
+
+    constructor (props) {
+        super (props);
+        this.state = {showWarning : true};
+        this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick () {
+        this.setState (state => ({
+            showWarning : !state.showWarning
         }));
     }
 
     render () {
-        return (
-            <button onClick = {this.handleClick}>
-                {this.state.isToggleOn ? 'ON' : 'OFF'}
-            </button>
+        return ( 
+            <div>
+                <WarningBanner warn = {this.state.showWarning} />
+                <button onClick = {this.handleToggleClick}>
+                    {this.state.showWarning ? 'hide' : 'show'}
+                </button>
+            </div>
         );
     }
 }
-
 ReactDOM.render (
-    <Toggle/>,
+    <Page/>,
     document.getElementById('root')
 );

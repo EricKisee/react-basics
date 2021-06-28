@@ -471,6 +471,12 @@ class FlavorForm extends React.Component {
     }
 }
 
+// you can pass an array into the value attribute,
+//  allowing you to select multiple options on a select tag
+
+// <select multiple={true} value={['B','C']}></select>
+
+
 ReactDOM.render(
     <FlavorForm/>,
     document.getElementById('root')

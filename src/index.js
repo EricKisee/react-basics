@@ -680,6 +680,8 @@ import './index.css';
 //     document.getElementById('root')
 // );
 
+// ---------- Containment with holes -----------------
+
 function SplitPane (props) {
     return (
         <div className = "SplitPane">

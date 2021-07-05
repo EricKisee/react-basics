@@ -435,49 +435,108 @@ import './index.css';
 //     document.getElementById('root')
 // );
 
-class FlavorForm extends React.Component {
+// class FlavorForm extends React.Component {
 
+//     constructor (props) {
+//         super (props);
+//         this.state = { value : 'coconut' };
+//         this.handleChange = this.handleChange.bind(this);
+//         this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+
+//     handleChange (event) {
+//         this.setState({value: event.target.value});
+//     }
+
+//     handleSubmit (event) {
+//         alert ('Your favorite flavor is: '+ this.state.value);
+//         event.preventDefault();
+//     }
+
+//     render () {
+//         return (
+//             <form onSubmit = {this.handleSubmit}>
+//                 <label>
+//                     Pick your favorite flavor: 
+//                     <select value={this.state.value} onChange={this.handleChange}>
+//                         <option value="grapefruit">grapefruit</option>
+//                         <option value="lime">lime</option>
+//                         <option value="coconut">coconut</option>
+//                         <option value="mango">mango</option>
+//                     </select>
+//                 </label>
+//                 <input type="submit" value="Submit"/>
+//             </form>
+//         );
+//     }
+// }
+
+// // you can pass an array into the value attribute,
+// //  allowing you to select multiple options on a select tag
+
+// // <select multiple={true} value={['B','C']}></select>
+
+
+// ReactDOM.render(
+//     <FlavorForm/>,
+//     document.getElementById('root')
+// );
+
+// file input tag
+// its value is readonly so its an uncontrolled component in react 
+
+{/* <input type="file"/> */}
+
+// handling multiple inputs
+
+class Reservation extends React.Component {
+    
     constructor (props) {
         super (props);
-        this.state = { value : 'coconut' };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            isGoing : true,
+            numberOfGuests : 2
+        };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleChange (event) {
-        this.setState({value: event.target.value});
-    }
+    handleInputChange (event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
 
-    handleSubmit (event) {
-        alert ('Your favorite flavor is: '+ this.state.value);
-        event.preventDefault();
+        this.setState ({
+            [name] : value
+        });
     }
 
     render () {
         return (
-            <form onSubmit = {this.handleSubmit}>
+            <form>
                 <label>
-                    Pick your favorite flavor: 
-                    <select value={this.state.value} onChange={this.handleChange}>
-                        <option value="grapefruit">grapefruit</option>
-                        <option value="lime">lime</option>
-                        <option value="coconut">coconut</option>
-                        <option value="mango">mango</option>
-                    </select>
+                    Is Going : 
+                    <input
+                        name="isGoing"
+                        type="checkbox"
+                        checked={this.state.isGoing}
+                        onChange={this.handleInputChange}/>
                 </label>
-                <input type="submit" value="Submit"/>
+                <br/>
+                <label>
+                    Number of Guests:
+                    <input
+                        name="numberOfGuests"
+                        type="number"
+                        value={this.state.numberOfGuests}
+                        onChange={this.handleInputChange} />
+                </label>
             </form>
         );
     }
 }
 
-// you can pass an array into the value attribute,
-//  allowing you to select multiple options on a select tag
-
-// <select multiple={true} value={['B','C']}></select>
-
-
-ReactDOM.render(
-    <FlavorForm/>,
+ReactDOM.render (
+    <Reservation/>,
     document.getElementById('root')
 );
